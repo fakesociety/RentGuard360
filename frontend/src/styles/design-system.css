@@ -1,0 +1,590 @@
+/* RentGuard 360 - Premium Design System */
+
+/* ============================================
+   ROOT VARIABLES - LIGHT MODE (Premium)
+   3-Level Contrast Hierarchy
+   ============================================ */
+:root {
+    /* Background Colors - 3-Level Hierarchy */
+    --bg-page: #F0F2F5;
+    /* Level 1: Page background (slightly gray) */
+    --bg-card: #FFFFFF;
+    /* Level 2: Card surfaces (pure white) */
+    --bg-inset: #E8EBEF;
+    /* Level 3: Inset/nested elements (darker for visible contrast) */
+
+    /* Legacy aliases for compatibility */
+    --bg-primary: var(--bg-page);
+    --bg-secondary: var(--bg-card);
+    --bg-tertiary: var(--bg-inset);
+    --bg-elevated: var(--bg-card);
+
+    /* Text Colors - Refined contrast */
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+    --text-tertiary: #64748B;
+    --text-quaternary: #94A3B8;
+
+    /* Accent Colors - Emerald/Teal */
+    --accent-primary: #059669;
+    --accent-primary-hover: #047857;
+    --accent-secondary: #0891B2;
+    --accent-success: #10B981;
+    --accent-warning: #F59E0B;
+    --accent-danger: #EF4444;
+    --accent-info: #3B82F6;
+
+    /* Gradient Accents */
+    --gradient-primary: linear-gradient(135deg, #059669 0%, #0891B2 100%);
+    --gradient-subtle: linear-gradient(135deg, #F0FDF4 0%, #ECFEFF 100%);
+
+    /* Glassmorphism Effects */
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(0, 0, 0, 0.08);
+    --glass-blur: 20px;
+
+    /* Shadows - Premium depth */
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --shadow-xl: 0 16px 40px rgba(0, 0, 0, 0.15);
+
+    /* Glow effect for accent elements */
+    --glow-primary: 0 0 20px rgba(5, 150, 105, 0.12);
+
+    /* Border Radius - Premium rounded */
+    --radius-xs: 8px;
+    --radius-sm: 12px;
+    --radius-md: 16px;
+    --radius-lg: 20px;
+    --radius-xl: 24px;
+    --radius-full: 9999px;
+
+    /* Spacing Scale */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+    --space-3xl: 64px;
+
+    /* Typography */
+    --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Segoe UI', 'Roboto', sans-serif;
+    --font-mono: 'SF Mono', 'Consolas', 'Monaco', monospace;
+
+    --font-size-xs: 12px;
+    --font-size-sm: 14px;
+    --font-size-base: 16px;
+    --font-size-lg: 18px;
+    --font-size-xl: 20px;
+    --font-size-2xl: 24px;
+    --font-size-3xl: 32px;
+    --font-size-4xl: 40px;
+
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    --line-height-tight: 1.2;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.75;
+
+    /* Transitions - Smooth premium animations */
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    /* Contract Risk Colors */
+    --risk-high: #EF4444;
+    --risk-medium: #F59E0B;
+    --risk-low: #10B981;
+    --risk-neutral: #64748B;
+}
+
+/* ============================================
+   DARK MODE VARIABLES - Premium 3-Level Contrast
+   ============================================ */
+[data-theme="dark"] {
+    /* Background Colors - 3-Level Hierarchy (Dark) */
+    --bg-page: #151a23;
+    /* Level 1: Deep dark page (darkest) */
+    --bg-card: #151A23;
+    /* Level 2: Card surfaces (slate-blue) */
+    --bg-inset: #1E2530;
+    /* Level 3: Inset/nested (lighter slate) */
+
+    /* Legacy aliases */
+    --bg-primary: var(--bg-page);
+    --bg-secondary: var(--bg-card);
+    --bg-tertiary: var(--bg-inset);
+    --bg-elevated: var(--bg-card);
+
+    /* Text Colors - Clear Hierarchy */
+    --text-primary: #f8fafc;
+    /* Slate-50: Primary text */
+    --text-secondary: #94a3b8;
+    /* Slate-400: Secondary */
+    --text-tertiary: #64748b;
+    /* Slate-500: Muted */
+    --text-quaternary: #475569;
+    /* Slate-600: Very muted */
+
+    /* Accent Colors - Professional Teal/Emerald */
+    --accent-primary: #10B981;
+    --accent-primary-hover: #34D399;
+    --accent-secondary: #06B6D4;
+    --accent-success: #22C55E;
+    --accent-warning: #F59E0B;
+    --accent-danger: #EF4444;
+    --accent-info: #3B82F6;
+
+    /* Gradient Accents - Subtle */
+    --gradient-primary: linear-gradient(135deg, #10B981 0%, #14b8a6 100%);
+    --gradient-subtle: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(20, 184, 166, 0.08) 100%);
+
+    /* Borders - Hairline precision */
+    --glass-bg: rgba(30, 41, 59, 0.95);
+    --glass-border: rgba(51, 65, 85, 0.5);
+
+    /* Shadows - Subtle depth */
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 16px 40px rgba(0, 0, 0, 0.6);
+
+    /* Glow - Minimal, professional */
+    --glow-primary: 0 0 16px rgba(16, 185, 129, 0.1);
+}
+
+/* ============================================
+   GLOBAL RESETS & BASE STYLES
+   ============================================ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+    max-width: 100%;
+}
+
+body {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-normal);
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    transition: background-color var(--transition-normal), color var(--transition-normal);
+    -webkit-tap-highlight-color: transparent;
+    overflow-x: clip;
+    max-width: 100%;
+
+    /* App-like feel: disable text selection globally */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+    caret-color: transparent;
+}
+
+#root {
+    min-height: 100vh;
+}
+
+/* ============================================
+   REUSABLE PAGE CONTAINER
+   Use this class on all page wrappers for:
+   - Full-width background
+   - Centered content (max 1200px)
+   ============================================ */
+.page-container {
+    min-height: 100vh;
+    padding: var(--space-xl) var(--space-md);
+    background: var(--bg-page);
+}
+
+.page-container>*:not(.section-band):not(.section-band-alt) {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ============================================
+   SECTION BANDS - Alternating Backgrounds
+   Use for complex pages with gray/white sections
+   ============================================ */
+
+/* Full-width section with PAGE background (gray) */
+.section-band {
+    width: 100vw;
+    /* Logical properties work for both LTR and RTL */
+    margin-inline: calc(-50vw + 50%);
+    padding: var(--space-2xl) var(--space-md);
+    background: var(--bg-page);
+    box-sizing: border-box;
+}
+
+/* Dark mode: use deeper black for section bands */
+[data-theme="dark"] .section-band {
+    background: #0B0E13;
+}
+
+/* Full-width section with CARD background (white) */
+.section-band-alt {
+    width: 100vw;
+    /* Logical properties work for both LTR and RTL */
+    margin-inline: calc(-50vw + 50%);
+    padding: var(--space-2xl) var(--space-md);
+    background: var(--bg-card);
+    box-sizing: border-box;
+}
+
+/* Center content inside bands */
+.section-band>*,
+.section-band-alt>* {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Remove focus outline globally (for cleaner UI) */
+*:focus {
+    outline: none;
+}
+
+button,
+a,
+select {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+}
+
+/* Re-enable text selection and caret for inputs/textareas */
+input,
+textarea,
+[contenteditable="true"] {
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+    user-select: text !important;
+    cursor: text !important;
+    caret-color: auto !important;
+}
+
+/* ============================================
+   TYPOGRAPHY UTILITIES
+   ============================================ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    color: var(--text-primary);
+}
+
+h1 {
+    font-size: var(--font-size-4xl);
+    letter-spacing: -0.02em;
+}
+
+h2 {
+    font-size: var(--font-size-3xl);
+    letter-spacing: -0.01em;
+}
+
+h3 {
+    font-size: var(--font-size-2xl);
+}
+
+h4 {
+    font-size: var(--font-size-xl);
+}
+
+h5 {
+    font-size: var(--font-size-lg);
+}
+
+h6 {
+    font-size: var(--font-size-base);
+}
+
+p {
+    color: var(--text-secondary);
+    line-height: var(--line-height-relaxed);
+}
+
+small {
+    font-size: var(--font-size-sm);
+    color: var(--text-tertiary);
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+/* Glass Card Effect */
+.glass {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+}
+
+/* Elevation Shadows */
+.shadow-sm {
+    box-shadow: var(--shadow-sm);
+}
+
+.shadow-md {
+    box-shadow: var(--shadow-md);
+}
+
+.shadow-lg {
+    box-shadow: var(--shadow-lg);
+}
+
+.shadow-xl {
+    box-shadow: var(--shadow-xl);
+}
+
+/* Border Radius */
+.rounded-sm {
+    border-radius: var(--radius-sm);
+}
+
+.rounded-md {
+    border-radius: var(--radius-md);
+}
+
+.rounded-lg {
+    border-radius: var(--radius-lg);
+}
+
+.rounded-xl {
+    border-radius: var(--radius-xl);
+}
+
+.rounded-full {
+    border-radius: var(--radius-full);
+}
+
+/* Spacing */
+.p-sm {
+    padding: var(--space-sm);
+}
+
+.p-md {
+    padding: var(--space-md);
+}
+
+.p-lg {
+    padding: var(--space-lg);
+}
+
+.p-xl {
+    padding: var(--space-xl);
+}
+
+.m-sm {
+    margin: var(--space-sm);
+}
+
+.m-md {
+    margin: var(--space-md);
+}
+
+.m-lg {
+    margin: var(--space-lg);
+}
+
+.m-xl {
+    margin: var(--space-xl);
+}
+
+/* Flex Utilities */
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.gap-sm {
+    gap: var(--space-sm);
+}
+
+.gap-md {
+    gap: var(--space-md);
+}
+
+.gap-lg {
+    gap: var(--space-lg);
+}
+
+/* Text Utilities */
+.text-primary {
+    color: var(--text-primary);
+}
+
+.text-secondary {
+    color: var(--text-secondary);
+}
+
+.text-tertiary {
+    color: var(--text-tertiary);
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.animate-fadeIn {
+    animation: fadeIn var(--transition-normal) ease-out;
+}
+
+.animate-slideUp {
+    animation: slideUp var(--transition-slow) ease-out;
+}
+
+.animate-scaleIn {
+    animation: scaleIn var(--transition-normal) ease-out;
+}
+
+/* ============================================
+   HOVER & INTERACTION STATES
+   ============================================ */
+.interactive {
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    cursor: pointer;
+}
+
+.interactive:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.interactive:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-md);
+}
+
+/* ============================================
+   SCROLLBAR STYLING (WebKit)
+   ============================================ */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--text-quaternary);
+    border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-tertiary);
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+.focus-visible:focus {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* ============================================
+   RESPONSIVE BREAKPOINTS
+   ============================================ */
+@media (max-width: 640px) {
+    :root {
+        --font-size-4xl: 32px;
+        --font-size-3xl: 24px;
+        --font-size-2xl: 20px;
+    }
+}

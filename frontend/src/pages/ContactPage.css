@@ -1,0 +1,252 @@
+/* 
+ * ContactPage.css - Contact Page Styles
+ * Contact form, help cards, response info
+ * 
+ * STRUCTURE:
+ * 1. Page Layout
+ * 2. Page Header
+ * 3. Content Layout
+ * 4. Form Card
+ * 5. Textarea
+ * 6. Messages (Error/Success)
+ * 7. Info Cards
+ * 8. Media Queries (768px, 600px, 480px)
+ * 
+ * NOTE: 
+ * - Uses .page-container for base layout (from design-system.css)
+ * - Uses .animate-fadeIn, .animate-slideUp (from design-system.css)
+ */
+
+/* ============================================
+   1. PAGE LAYOUT
+   ============================================ */
+
+/* 
+ * Contact Page Layout Fix:
+ * Same approach as Settings page - use flexbox to fill remaining space
+ * so the --bg-page background extends to the footer with no gap.
+ */
+
+
+/* All direct children get centered with max-width */
+.contact-page>* {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ============================================
+   2. PAGE HEADER
+   ============================================ */
+
+.contact-header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+}
+
+.contact-header h1 {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+}
+
+.contact-header p {
+    color: var(--text-secondary);
+    font-size: var(--font-size-lg);
+}
+
+/* ============================================
+   3. CONTENT LAYOUT
+   ============================================ */
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: var(--space-xl);
+    align-items: start;
+}
+
+/* ============================================
+   4. FORM CARD
+   ============================================ */
+
+.contact-form-card h3 {
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+    font-size: var(--font-size-xl);
+}
+
+.contact-form-card form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+}
+
+/* ============================================
+   5. TEXTAREA
+   ============================================ */
+
+.textarea-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.input-label {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-secondary);
+}
+
+.contact-textarea {
+    width: 100%;
+    padding: var(--space-md);
+    font-family: var(--font-sans);
+    font-size: var(--font-size-base);
+    color: var(--text-primary);
+    background: var(--bg-tertiary);
+    border: 1.5px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    resize: vertical;
+    transition: all var(--transition-fast);
+}
+
+.contact-textarea:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+}
+
+[data-theme="dark"] .contact-textarea {
+    background: var(--bg-tertiary);
+    border-color: rgba(240, 246, 252, 0.1);
+}
+
+[data-theme="dark"] .contact-textarea:focus {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+/* ============================================
+   6. MESSAGES (ERROR/SUCCESS)
+   ============================================ */
+
+.form-error {
+    color: var(--accent-danger);
+    font-size: var(--font-size-sm);
+    padding: var(--space-sm);
+    background: rgba(239, 68, 68, 0.1);
+    border-radius: var(--radius-sm);
+    text-align: center;
+}
+
+.success-message {
+    text-align: center;
+    padding: var(--space-xl);
+}
+
+.success-icon {
+    font-size: 48px;
+    display: block;
+    margin-bottom: var(--space-md);
+}
+
+.success-message h3 {
+    color: var(--accent-success);
+    margin-bottom: var(--space-sm);
+}
+
+.success-message p {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-lg);
+}
+
+/* ============================================
+   7. INFO CARDS
+   ============================================ */
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.contact-info h4 {
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+}
+
+.help-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.help-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.help-list li strong {
+    color: var(--text-primary);
+    font-size: var(--font-size-sm);
+}
+
+.help-list li span {
+    color: var(--text-secondary);
+    font-size: var(--font-size-xs);
+}
+
+.response-info {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+}
+
+/* ============================================
+   8. MEDIA QUERIES
+   ============================================ */
+
+/* Tablet (iPad Mini/Air) */
+@media (max-width: 768px) {
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Mobile (iPhone Pro) */
+@media (max-width: 600px) {
+    .contact-page {
+        padding: var(--space-lg) var(--space-sm);
+    }
+
+    .contact-header h1 {
+        font-size: var(--font-size-2xl);
+    }
+
+    .contact-header p {
+        font-size: var(--font-size-base);
+    }
+
+    .contact-info {
+        order: -1;
+    }
+}
+
+/* Small Mobile (iPhone SE) */
+@media (max-width: 480px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}

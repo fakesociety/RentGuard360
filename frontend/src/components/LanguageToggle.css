@@ -1,0 +1,58 @@
+/*
+ * ============================================
+ *  LanguageToggle.css
+ *  Hebrew/English Language Switcher Styles
+ * ============================================
+ *
+ * SECTIONS:
+ * - Toggle button base
+ * - Language options (active/inactive)
+ * - Dark mode adjustments
+ *
+ * ============================================
+ */
+
+/* Language Toggle Button */
+.language-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.15s ease;
+}
+
+.language-toggle:hover {
+    background: var(--bg-inset);
+    border-color: var(--accent-primary);
+}
+
+.lang-option {
+    color: var(--text-tertiary);
+    transition: color 0.15s ease;
+}
+
+.lang-option.active {
+    color: var(--accent-primary);
+    font-weight: 700;
+}
+
+.lang-separator {
+    color: var(--text-quaternary);
+    font-weight: 300;
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .language-toggle {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .language-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+}

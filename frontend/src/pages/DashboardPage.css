@@ -1,0 +1,490 @@
+/* 
+ * Dashboard Page - Modern SaaS Design
+ * Welcome, Stats, Actions, Guide, and Differentiators
+ * 
+ * STRUCTURE:
+ * 1. Page Layout
+ * 2. Welcome Section
+ * 3. Stats Section
+ * 4. Actions Section
+ * 5. Guide Section
+ * 6. Differentiators Section
+ * 7. Animations
+ * 8. Media Queries
+ */
+
+/* ============================================
+   1. PAGE LAYOUT
+   ============================================ */
+
+.dashboard-page {
+    min-height: 100vh;
+    padding: var(--space-xl) var(--space-md);
+    padding-bottom: 0;
+    /* Remove bottom padding - let sections extend to footer */
+    background: var(--bg-page);
+}
+
+/* Inner content wrapper for centering - exclude section-bands */
+.dashboard-page>*:not(.section-band):not(.section-band-alt) {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* First section-band extends up to cover gap behind navbar */
+.dashboard-page .section-band:first-child {
+    margin-top: calc(-1 * var(--space-xl));
+    padding-top: calc(var(--space-2xl) + var(--space-xl));
+}
+
+/* ============================================
+   2. WELCOME SECTION
+   ============================================ */
+
+.welcome-section {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+}
+
+.welcome-title {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+}
+
+.welcome-subtitle {
+    color: var(--text-secondary);
+    font-size: var(--font-size-lg);
+}
+
+/* ============================================
+   3. STATS SECTION
+   ============================================ */
+
+.stats-section {
+    margin-bottom: var(--space-2xl);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-lg);
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.stat-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.stat-content {
+    flex: 1;
+}
+
+.stat-value {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+}
+
+.stat-label {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+/* ============================================
+   4. ACTIONS SECTION
+   ============================================ */
+
+.actions-section {
+    margin-bottom: var(--space-2xl);
+}
+
+.dashboard-page .section-title {
+    font-size: var(--font-size-xl);
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+    text-align: center;
+}
+
+.actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-lg);
+}
+
+.action-card {
+    text-align: center;
+}
+
+/* Cards on white backgrounds - light mode uses page background */
+.action-card-inset {
+    background: var(--bg-page) !important;
+}
+
+/* Dark mode: use glass background for better appearance */
+[data-theme="dark"] .action-card-inset {
+    background: var(--glass-bg) !important;
+}
+
+.action-icon-wrapper {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--space-md);
+    color: var(--accent-primary);
+}
+
+/* Remove background in dark mode only */
+[data-theme="dark"] .action-icon-wrapper {
+    background: transparent;
+}
+
+.action-card h3 {
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+}
+
+.action-card p {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-lg);
+}
+
+/* ============================================
+   5. GUIDE SECTION
+   ============================================ */
+
+.guide-card h2 {
+    text-align: center;
+    color: var(--text-primary);
+    margin-bottom: var(--space-xl);
+}
+
+.guide-steps {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+}
+
+.step-arrow {
+    font-size: 2rem;
+    color: var(--accent-primary);
+    font-weight: bold;
+    flex-shrink: 0;
+    align-self: center;
+}
+
+.guide-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+    min-width: 200px;
+}
+
+.guide-number {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--accent-primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-md);
+}
+
+.guide-content h4 {
+    color: var(--text-primary);
+    margin-bottom: var(--space-xs);
+}
+
+.guide-content p {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+/* ============================================
+   6. DIFFERENTIATORS SECTION
+   ============================================ */
+
+.differentiators-section {
+    margin-top: var(--space-2xl);
+    padding-bottom: var(--space-2xl);
+    /* Extend to meet footer seamlessly */
+}
+
+.differentiators-container {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: var(--space-xl);
+    background: var(--bg-page);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-md);
+}
+
+/* Dark mode: use glass background for better appearance */
+[data-theme="dark"] .differentiators-container {
+    background: var(--glass-bg);
+}
+
+.differentiators-image {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+}
+
+.differentiators-image img {
+    width: 100%;
+    max-width: 260px;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    border-radius: var(--radius-md);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.differentiators-content h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-sm) 0;
+}
+
+.differentiators-subtitle {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin: 0 0 var(--space-xl) 0;
+    line-height: 1.6;
+}
+
+.feature-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.feature-item {
+    display: flex;
+    gap: var(--space-md);
+    align-items: flex-start;
+}
+
+.feature-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.feature-icon.privacy {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+}
+
+.feature-icon.prompt {
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+}
+
+.feature-icon.score {
+    background: rgba(59, 130, 246, 0.15);
+    color: #3b82f6;
+}
+
+.feature-icon.tips {
+    background: rgba(139, 92, 246, 0.15);
+    color: #8b5cf6;
+}
+
+.feature-icon.aws {
+    background: rgba(236, 72, 153, 0.15);
+    color: #ec4899;
+}
+
+.feature-text h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 4px 0;
+}
+
+.feature-text p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* ============================================
+   7. ANIMATIONS
+   ============================================ */
+
+.animate-fadeIn {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-slideUp {
+    animation: slideUp 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   8. MEDIA QUERIES
+   ============================================ */
+
+/* Large Tablet / Small Laptop */
+@media (max-width: 1024px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Tablet with Differentiators */
+@media (max-width: 900px) {
+    .differentiators-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .differentiators-image {
+        order: 1;
+        margin-bottom: var(--space-lg);
+    }
+
+    .differentiators-content {
+        order: 2;
+    }
+
+    .feature-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .differentiators-image img {
+        max-width: 200px;
+    }
+
+    .guide-steps {
+        flex-direction: column;
+    }
+
+    .step-arrow {
+        transform: rotate(90deg);
+        font-size: 1.5rem;
+    }
+
+    /* RTL: Rotate arrow to point DOWN */
+    [dir="rtl"] .step-arrow {
+        transform: rotate(-90deg);
+    }
+}
+
+/* Tablet (iPad Mini/Air) */
+@media (max-width: 768px) {
+    .dashboard-page {
+        padding: var(--space-lg) var(--space-sm);
+    }
+
+    .welcome-title {
+        font-size: var(--font-size-2xl);
+    }
+
+    .welcome-subtitle {
+        font-size: var(--font-size-base);
+    }
+
+    .stat-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+    }
+
+    .actions-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Small Mobile (iPhone SE) */
+@media (max-width: 480px) {
+    .welcome-title {
+        font-size: var(--font-size-xl);
+    }
+
+    .stat-value {
+        font-size: var(--font-size-lg);
+    }
+
+    .guide-number {
+        width: 40px;
+        height: 40px;
+        font-size: var(--font-size-lg);
+    }
+
+    .differentiators-content h2 {
+        font-size: 1.25rem;
+    }
+
+    .feature-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+}

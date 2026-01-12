@@ -1,0 +1,450 @@
+/*
+ * Admin Sidebar - Responsive Navigation
+ * Professional SaaS Style with Collapsible Tablet Mode
+ * 
+ * STRUCTURE:
+ * 1. CSS Variables
+ * 2. Base Sidebar Styles
+ * 3. Theme Modes (Dark/Light)
+ * 4. Header / Logo
+ * 5. Back Link
+ * 6. Controls (Theme/Language)
+ * 7. Navigation Items
+ * 8. Footer
+ * 9. Media Queries
+ *    - 1024px: Collapsible sidebar (icons only)
+ *    - 768px: Hidden, overlay mode
+ *    - 600px: Mobile adjustments
+ *    - 480px: Small mobile
+ */
+
+/* ============================================
+   1. CSS VARIABLES
+   ============================================ */
+
+.admin-sidebar {
+    --sidebar-width: 260px;
+    --sidebar-collapsed-width: 60px;
+    --sidebar-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   2. BASE SIDEBAR STYLES
+   ============================================ */
+
+.admin-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    height: 100dvh;
+    /* Dynamic viewport height - accounts for Safari browser chrome */
+    width: var(--sidebar-width);
+    display: flex;
+    flex-direction: column;
+    z-index: 200;
+    transition: var(--sidebar-transition);
+    overflow: hidden;
+}
+
+[dir="rtl"] .admin-sidebar {
+    left: auto;
+    right: 0;
+}
+
+/* ============================================
+   3. THEME MODES
+   ============================================ */
+
+/* Dark Mode */
+.admin-sidebar.dark {
+    background: #0D1117;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+[dir="rtl"] .admin-sidebar.dark {
+    border-right: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Light Mode */
+.admin-sidebar.light {
+    background: #ffffff;
+    border-right: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-md);
+}
+
+[dir="rtl"] .admin-sidebar.light {
+    border-right: none;
+    border-left: 1px solid var(--glass-border);
+}
+
+/* ============================================
+   4. HEADER / LOGO
+   ============================================ */
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    min-height: 72px;
+}
+
+.admin-sidebar.light .sidebar-header {
+    border-bottom-color: var(--glass-border);
+}
+
+.sidebar-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    text-decoration: none;
+    transition: opacity var(--transition-fast);
+}
+
+.sidebar-logo:hover {
+    opacity: 0.8;
+}
+
+.sidebar-logo .logo-icon {
+    width: 32px;
+    height: 32px;
+    color: var(--accent-primary);
+    flex-shrink: 0;
+}
+
+.sidebar-logo .logo-text {
+    font-size: 18px;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    white-space: nowrap;
+    overflow: hidden;
+    opacity: 1;
+    transition: opacity 0.2s ease, width 0.3s ease;
+}
+
+/* ============================================
+   5. BACK LINK
+   ============================================ */
+
+.sidebar-back-link {
+    padding: 8px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.admin-sidebar.light .sidebar-back-link {
+    border-bottom-color: var(--glass-border);
+}
+
+.back-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    color: var(--text-tertiary);
+    font-size: 12px;
+    font-weight: 500;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.back-link:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-primary);
+}
+
+.admin-sidebar.light .back-link:hover {
+    background: var(--bg-tertiary);
+}
+
+.back-link svg {
+    flex-shrink: 0;
+}
+
+.back-link span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: opacity 0.2s ease;
+}
+
+/* ============================================
+   6. SIDEBAR CONTROLS (Theme/Language Toggles)
+   ============================================ */
+
+.sidebar-control {
+    padding: 8px 14px;
+}
+
+.sidebar-control .toggle-wrapper {
+    justify-content: flex-end;
+}
+
+/* ============================================
+   7. NAVIGATION
+   ============================================ */
+
+.sidebar-nav {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 16px 12px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.sidebar-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.sidebar-nav-item:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-primary);
+}
+
+.admin-sidebar.light .sidebar-nav-item:hover {
+    background: var(--bg-tertiary);
+}
+
+.sidebar-nav-item.active {
+    background: rgba(var(--accent-primary-rgb, 16, 185, 129), 0.12);
+    color: var(--accent-primary);
+}
+
+.sidebar-nav-item.active .nav-icon {
+    color: var(--accent-primary);
+}
+
+.nav-icon {
+    flex-shrink: 0;
+    transition: color var(--transition-fast);
+}
+
+.nav-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: opacity 0.2s ease;
+}
+
+/* ============================================
+   8. FOOTER
+   ============================================ */
+
+.sidebar-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    flex-shrink: 0;
+    /* Ensure footer never gets compressed */
+}
+
+.admin-sidebar.light .sidebar-footer {
+    border-top-color: var(--glass-border);
+}
+
+.sidebar-footer-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border: none;
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.sidebar-footer-btn:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-primary);
+}
+
+.admin-sidebar.light .sidebar-footer-btn:hover {
+    background: var(--bg-tertiary);
+}
+
+.sidebar-footer-btn.logout-btn:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--accent-danger);
+}
+
+.sidebar-footer-btn svg {
+    flex-shrink: 0;
+}
+
+.sidebar-footer-btn span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: opacity 0.2s ease;
+}
+
+/* User Profile */
+.sidebar-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.03);
+    overflow: hidden;
+}
+
+.admin-sidebar.light .sidebar-user {
+    background: var(--bg-tertiary);
+}
+
+.user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    transition: opacity 0.2s ease;
+}
+
+.user-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.user-role {
+    font-size: 11px;
+    color: var(--text-tertiary);
+}
+
+/* ============================================
+   9. MEDIA QUERIES
+   ============================================ */
+
+/* --- Tablet/Mobile (1024px and below) - Full Sidebar Overlay --- */
+/* Sidebar is full width, slides in from left/right as overlay */
+@media (max-width: 1024px) {
+
+    /* Remove inner fixed position - let parent container control positioning */
+    /* This allows the sidebar-container transform to work correctly */
+    .admin-sidebar {
+        position: static;
+        /* Override desktop fixed position */
+        width: var(--sidebar-width);
+        box-shadow: var(--shadow-xl);
+        padding-top: 56px;
+        /* Make room for mobile-top-bar */
+    }
+
+    /* All text elements visible in overlay */
+    .admin-sidebar .logo-text,
+    .admin-sidebar .nav-label,
+    .admin-sidebar .back-link span,
+    .admin-sidebar .sidebar-footer-btn span,
+    .admin-sidebar .user-info {
+        opacity: 1;
+        width: auto;
+    }
+
+    .admin-sidebar .sidebar-nav-item,
+    .admin-sidebar .back-link,
+    .admin-sidebar .sidebar-footer-btn {
+        justify-content: flex-start;
+        padding: 12px 14px;
+    }
+
+    .admin-sidebar .sidebar-control {
+        display: block;
+    }
+
+    .admin-sidebar .sidebar-user {
+        justify-content: flex-start;
+        padding: 12px 14px;
+    }
+
+    /* Hide sidebar-header - mobile-top-bar shows the logo instead */
+    .admin-sidebar .sidebar-header {
+        display: none;
+    }
+
+    /* No hover effects needed in overlay mode */
+    .admin-sidebar:hover {
+        width: var(--sidebar-width);
+    }
+}
+
+/* --- Mobile (600px) --- */
+@media (max-width: 600px) {
+    .admin-sidebar {
+        width: 280px;
+    }
+
+    .sidebar-nav-item {
+        padding: 14px 16px;
+        font-size: 15px;
+    }
+
+    .sidebar-footer-btn {
+        padding: 12px 16px;
+    }
+}
+
+/* --- Small Mobile (480px) --- */
+@media (max-width: 480px) {
+    .admin-sidebar {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .sidebar-header {
+        padding: 16px 14px;
+    }
+
+    .sidebar-nav {
+        padding: 12px 10px;
+    }
+
+    .sidebar-footer {
+        padding: 12px 10px;
+    }
+}

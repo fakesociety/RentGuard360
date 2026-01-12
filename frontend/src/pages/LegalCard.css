@@ -1,0 +1,635 @@
+/* ========================================
+   LEGAL TECH CARD - Modern Redesign
+   Light Mode Default + Dark Mode Support
+   ======================================== */
+
+/* ===== LIGHT MODE (Default) ===== */
+.legal-card {
+    position: relative;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.98) 100%);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    border-radius: 16px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.legal-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+    border-color: rgba(203, 213, 225, 0.9);
+}
+
+/* Severity Glow - Right Border */
+.severity-glow {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 4px;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.severity-glow.high {
+    background: linear-gradient(180deg, #ef4444 0%, #dc2626 50%, #ef4444 100%);
+    box-shadow: 0 0 12px rgba(239, 68, 68, 0.3);
+}
+
+.severity-glow.medium {
+    background: linear-gradient(180deg, #f59e0b 0%, #d97706 50%, #f59e0b 100%);
+    box-shadow: 0 0 12px rgba(245, 158, 11, 0.3);
+}
+
+.severity-glow.low {
+    background: linear-gradient(180deg, #10b981 0%, #059669 50%, #10b981 100%);
+    box-shadow: 0 0 12px rgba(16, 185, 129, 0.3);
+}
+
+/* Card Header */
+.legal-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 24px 28px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.legal-card-header:hover {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.legal-header-main {
+    flex: 1;
+    text-align: right;
+    padding-left: 16px;
+}
+
+.legal-title {
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0 0 12px 0;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+}
+
+.legal-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+/* Risk Badge - Pill with Dot */
+.risk-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.risk-pill.high {
+    background: rgba(239, 68, 68, 0.1);
+    color: #dc2626;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.risk-pill.medium {
+    background: rgba(245, 158, 11, 0.1);
+    color: #b45309;
+    border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.risk-pill.low {
+    background: rgba(16, 185, 129, 0.1);
+    color: #059669;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.risk-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: pulse-dot 2s infinite;
+}
+
+.risk-pill.high .risk-dot {
+    background: #ef4444;
+    box-shadow: 0 0 6px rgba(239, 68, 68, 0.5);
+}
+
+.risk-pill.medium .risk-dot {
+    background: #f59e0b;
+    box-shadow: 0 0 6px rgba(245, 158, 11, 0.5);
+}
+
+.risk-pill.low .risk-dot {
+    background: #10b981;
+    box-shadow: 0 0 6px rgba(16, 185, 129, 0.5);
+}
+
+@keyframes pulse-dot {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.7;
+        transform: scale(1.1);
+    }
+}
+
+.points-badge {
+    background: rgba(239, 68, 68, 0.08);
+    color: #dc2626;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Expand Trigger */
+.expand-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+}
+
+.expand-trigger:hover {
+    background: rgba(0, 0, 0, 0.08);
+    color: #334155;
+}
+
+.expand-trigger.expanded {
+    transform: rotate(180deg);
+    background: rgba(16, 185, 129, 0.12);
+    color: #059669;
+}
+
+/* Card Content */
+.legal-card-content {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.3s ease,
+        padding 0.3s ease;
+}
+
+.legal-card-content.expanded {
+    max-height: 2000px;
+    opacity: 1;
+    padding: 0 28px 28px;
+    border-top: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+/* Legal Sections - Icon List Layout */
+.legal-section {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.legal-section:first-child {
+    margin-top: 20px;
+}
+
+.section-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: rgba(100, 116, 139, 0.1);
+    color: #64748b;
+    transition: all 0.2s ease;
+    margin-top: 0; /* Align icon with label at top */
+}
+
+.section-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.section-body {
+    flex: 1;
+    text-align: right;
+    min-width: 0;
+}
+
+.section-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #64748b;
+    margin: 0 0 12px 0;
+}
+
+/* Quote Section - Original Clause */
+.quote-section .section-icon {
+    background: rgba(100, 116, 139, 0.12);
+    color: #64748b;
+}
+
+.original-quote {
+    margin: 0;
+    padding: 18px 22px;
+    border-right: 3px solid #94a3b8;
+    background: rgba(241, 245, 249, 0.8);
+    border-radius: 0 12px 12px 0;
+    font-size: 1rem;
+    font-style: italic;
+    color: #374151;
+    line-height: 1.9;
+}
+
+/* Legal Basis - Compact */
+.compact-section .section-icon {
+    background: rgba(99, 102, 241, 0.1);
+    color: #6366f1;
+}
+
+.legal-basis-text {
+    margin: 0;
+    font-size: 1rem;
+    color: #1e293b;
+    line-height: 1.85;
+    padding: 14px 18px;
+    background: rgba(99, 102, 241, 0.05);
+    border-radius: 10px;
+    border-right: 2px solid rgba(99, 102, 241, 0.3);
+}
+
+/* Explanation Section */
+.explanation-section .section-icon {
+    background: rgba(245, 158, 11, 0.1);
+    color: #d97706;
+}
+
+.explanation-text {
+    margin: 0;
+    font-size: 1rem;
+    color: #1e293b;
+    line-height: 1.9;
+    padding: 14px 18px;
+    background: rgba(245, 158, 11, 0.06);
+    border-radius: 10px;
+    border-right: 2px solid rgba(245, 158, 11, 0.3);
+}
+
+/* Recommendation Section - Highlighted */
+.recommendation-section .section-icon {
+    background: rgba(16, 185, 129, 0.12);
+    color: #059669;
+}
+
+.recommendation-box {
+    background: rgba(16, 185, 129, 0.06);
+    border: 1px solid rgba(16, 185, 129, 0.15);
+    border-radius: 14px;
+    padding: 20px;
+}
+
+.recommendation-text {
+    margin: 0 0 16px 0;
+    font-size: 1rem;
+    color: #0f172a;
+    line-height: 1.9;
+    font-weight: 500;
+}
+
+/* Copy Button */
+.copy-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    border-radius: 10px;
+    color: #059669;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.copy-button:hover {
+    background: #10b981;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+}
+
+.copy-button.copied {
+    background: #10b981;
+    color: white;
+}
+
+/* Tip Section */
+.tip-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px dashed rgba(203, 213, 225, 0.6);
+}
+
+.tip-section .section-icon {
+    background: rgba(14, 165, 233, 0.1);
+    color: #0284c7;
+}
+
+.tip-label {
+    color: #0284c7 !important;
+}
+
+.tip-text {
+    margin: 0;
+    font-size: 1rem;
+    color: #0369a1;
+    line-height: 1.85;
+    padding: 16px 20px;
+    background: rgba(14, 165, 233, 0.05);
+    border-radius: 10px;
+    border-right: 2px solid rgba(14, 165, 233, 0.25);
+}
+
+
+/* ========================================
+   DARK MODE OVERRIDES
+   ======================================== */
+
+[data-theme="dark"] .legal-card {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);
+    border: 1px solid rgba(71, 85, 105, 0.4);
+    backdrop-filter: blur(12px);
+    box-shadow: none;
+}
+
+[data-theme="dark"] .legal-card:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border-color: rgba(100, 116, 139, 0.5);
+}
+
+[data-theme="dark"] .severity-glow.high {
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .severity-glow.medium {
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .severity-glow.low {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .legal-card-header:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+[data-theme="dark"] .legal-title {
+    color: #f1f5f9;
+}
+
+[data-theme="dark"] .risk-pill.high {
+    background: rgba(239, 68, 68, 0.12);
+    color: #fca5a5;
+    border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+[data-theme="dark"] .risk-pill.medium {
+    background: rgba(245, 158, 11, 0.12);
+    color: #fcd34d;
+    border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+[data-theme="dark"] .risk-pill.low {
+    background: rgba(16, 185, 129, 0.12);
+    color: #6ee7b7;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+[data-theme="dark"] .risk-pill.high .risk-dot {
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+}
+
+[data-theme="dark"] .risk-pill.medium .risk-dot {
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.6);
+}
+
+[data-theme="dark"] .risk-pill.low .risk-dot {
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+}
+
+[data-theme="dark"] .points-badge {
+    background: rgba(239, 68, 68, 0.08);
+    color: #f87171;
+}
+
+[data-theme="dark"] .expand-trigger {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .expand-trigger:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #e2e8f0;
+}
+
+[data-theme="dark"] .expand-trigger.expanded {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+}
+
+[data-theme="dark"] .legal-card-content.expanded {
+    border-top: 1px solid rgba(71, 85, 105, 0.3);
+}
+
+[data-theme="dark"] .section-icon {
+    background: rgba(100, 116, 139, 0.15);
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .section-label {
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .quote-section .section-icon {
+    background: rgba(100, 116, 139, 0.2);
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .original-quote {
+    border-right: 3px solid #475569;
+    background: rgba(30, 41, 59, 0.5);
+    color: #cbd5e1;
+}
+
+[data-theme="dark"] .compact-section .section-icon {
+    background: rgba(99, 102, 241, 0.15);
+    color: #818cf8;
+}
+
+[data-theme="dark"] .legal-basis-text {
+    color: #e2e8f0;
+    background: rgba(99, 102, 241, 0.06);
+    border-right: 2px solid rgba(99, 102, 241, 0.4);
+}
+
+[data-theme="dark"] .explanation-section .section-icon {
+    background: rgba(245, 158, 11, 0.15);
+    color: #fbbf24;
+}
+
+[data-theme="dark"] .explanation-text {
+    color: #f1f5f9;
+    background: rgba(245, 158, 11, 0.08);
+    border-right: 2px solid rgba(245, 158, 11, 0.35);
+}
+
+[data-theme="dark"] .recommendation-section .section-icon {
+    color: #ffffff;
+}
+
+[data-theme="dark"] .recommendation-box {
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+[data-theme="dark"] .recommendation-text {
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .recommendation-box .recommendation-text {
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .copy-button {
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #34d399;
+}
+
+[data-theme="dark"] .copy-button:hover {
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+[data-theme="dark"] .tip-section {
+    border-top: 1px dashed rgba(71, 85, 105, 0.4);
+}
+
+[data-theme="dark"] .tip-section .section-icon {
+    background: rgba(56, 189, 248, 0.15);
+    color: #38bdf8;
+}
+
+[data-theme="dark"] .tip-label {
+    color: #38bdf8 !important;
+}
+
+[data-theme="dark"] .tip-text {
+    color: #e0f2fe;
+    background: rgba(56, 189, 248, 0.06);
+    border-right: 2px solid rgba(56, 189, 248, 0.3);
+}
+
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+    .legal-card-header {
+        padding: 18px 20px;
+    }
+
+    .legal-title {
+        font-size: 1.125rem;
+    }
+
+    .legal-card-content.expanded {
+        padding: 0 20px 20px;
+    }
+
+    .legal-section {
+        gap: 12px;
+    }
+
+    .section-icon {
+        width: 32px;
+        height: 32px;
+    }
+
+    .recommendation-box {
+        padding: 16px;
+    }
+}
+
+/* Small Mobile (iPhone SE) */
+@media (max-width: 480px) {
+    .legal-card-header {
+        padding: 14px 16px;
+    }
+
+    .legal-title {
+        font-size: 1rem;
+    }
+
+    .legal-card-content.expanded {
+        padding: 0 16px 16px;
+    }
+
+    .legal-section {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .section-icon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .original-quote,
+    .legal-basis-text,
+    .tip-text {
+        padding: 12px 14px;
+        font-size: 13px;
+    }
+
+    .recommendation-box {
+        padding: 14px;
+    }
+
+    .recommendation-text {
+        font-size: 14px;
+    }
+
+    .copy-button {
+        width: 100%;
+        justify-content: center;
+    }
+}

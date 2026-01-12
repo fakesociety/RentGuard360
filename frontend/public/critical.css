@@ -1,0 +1,13 @@
+body { margin: 0; background: #0B0E13; }
+#root:empty::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin: calc(50vh - 20px) auto;
+  border: 3px solid #1E2530;
+  border-top-color: #10B981;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }

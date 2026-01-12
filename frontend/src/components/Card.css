@@ -1,0 +1,102 @@
+/*
+ * ============================================
+ *  Card.css
+ *  Glassmorphic Card Styles
+ * ============================================
+ *
+ * SECTIONS:
+ * - Base & padding sizes
+ * - Variants (elevated, outlined, glass)
+ * - States (hoverable, clickable)
+ * - Dark mode enhancements
+ *
+ * ============================================
+ */
+
+.card {
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-normal);
+    position: relative;
+}
+
+/* ========== PADDING SIZES ========== */
+.card-padding-sm {
+    padding: var(--space-md);
+}
+
+.card-padding-md {
+    padding: var(--space-lg);
+}
+
+.card-padding-lg {
+    padding: var(--space-xl);
+}
+
+/* ========== VARIANTS ========== */
+
+/* Elevated Card - Level 2 surface (bg-card) */
+.card-elevated {
+    background: var(--bg-card);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--glass-border);
+}
+
+/* Outlined Card - Border emphasis */
+.card-outlined {
+    background: var(--bg-card);
+    border: 1.5px solid var(--glass-border);
+}
+
+/* Glass Card - Glassmorphism */
+.card-glass {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    box-shadow: var(--shadow-sm);
+}
+
+/* ========== STATES ========== */
+
+/* Hoverable */
+.card-hoverable:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+}
+
+/* Clickable */
+.card-clickable {
+    cursor: pointer;
+    user-select: none;
+}
+
+.card-clickable:active {
+    transform: scale(0.98);
+    box-shadow: var(--shadow-sm);
+}
+
+.card-clickable:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
+/* ========== DARK MODE ENHANCEMENTS ========== */
+[data-theme="dark"] .card-elevated {
+    box-shadow: var(--shadow-lg);
+    background: var(--glass-bg);
+    border-color: var(--glass-border);
+}
+
+[data-theme="dark"] .card-elevated:hover {
+    border-color: var(--accent-primary);
+    box-shadow: var(--glow-primary), var(--shadow-lg);
+}
+
+[data-theme="dark"] .card-outlined {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .card-glass {
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: var(--shadow-md);
+}

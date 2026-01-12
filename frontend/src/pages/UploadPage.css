@@ -1,0 +1,658 @@
+/* 
+ * Upload Page - Clean & Modern Design
+ * Teal-themed with smooth animations
+ * 
+ * STRUCTURE:
+ * 1. Page Layout
+ * 2. Header
+ * 3. Drop Zone (base, hover, dragging, has-file)
+ * 4. Drop Zone Dark Mode
+ * 5. File Preview & Editing
+ * 6. Upload Progress
+ * 7. Success Card
+ * 8. Analyzing/Loading States
+ * 9. Metadata Card
+ * 10. Error Message
+ * 11. Terms Section
+ * 12. Terms Modal
+ * 13. Animations
+ * 14. Media Queries
+ */
+
+/* ============================================
+   1. PAGE LAYOUT
+   ============================================ */
+
+.upload-page {
+    padding: var(--space-xl) var(--space-md);
+}
+
+.upload-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.upload-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+/* ============================================
+   2. HEADER
+   ============================================ */
+
+.upload-header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+}
+
+.upload-header h1 {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+}
+
+.upload-header p {
+    color: var(--text-secondary);
+    font-size: var(--font-size-lg);
+}
+
+/* ============================================
+   3. DROP ZONE
+   ============================================ */
+
+/* Base Drop Zone - Vibrant Teal Design */
+.drop-zone {
+    border: 2px dashed rgba(20, 184, 166, 0.5) !important;
+    background: linear-gradient(135deg,
+            rgba(240, 253, 250, 0.9) 0%,
+            rgba(204, 251, 241, 0.5) 100%) !important;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.drop-zone::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(20, 184, 166, 0.15) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.drop-zone:hover::before {
+    opacity: 1;
+}
+
+/* Hide spotlight when a file is selected */
+.drop-zone.has-file::before {
+    display: none;
+}
+
+/* Hover State */
+.drop-zone:hover {
+    border-color: #14b8a6 !important;
+    background: linear-gradient(135deg,
+            rgba(204, 251, 241, 0.7) 0%,
+            rgba(153, 246, 228, 0.4) 100%) !important;
+    box-shadow:
+        0 0 0 4px rgba(20, 184, 166, 0.1),
+        0 8px 32px rgba(20, 184, 166, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Dragging State */
+.drop-zone.dragging {
+    border-color: #0d9488 !important;
+    background: linear-gradient(135deg,
+            rgba(153, 246, 228, 0.6) 0%,
+            rgba(94, 234, 212, 0.3) 100%) !important;
+    transform: scale(1.02);
+    box-shadow:
+        0 0 0 6px rgba(20, 184, 166, 0.15),
+        0 12px 40px rgba(20, 184, 166, 0.25);
+}
+
+/* Has File State */
+.drop-zone.has-file {
+    border-style: solid !important;
+    border-color: #10b981 !important;
+    background: rgba(240, 253, 250, 0.9) !important;
+}
+
+/* Drop Content */
+.drop-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    position: relative;
+    z-index: 1;
+}
+
+.drop-icon {
+    font-size: 56px;
+    filter: hue-rotate(150deg) saturate(1.5);
+}
+
+.drop-content h3 {
+    font-size: var(--font-size-xl);
+    color: #0f766e;
+    font-weight: 700;
+}
+
+.drop-content p {
+    color: #14b8a6;
+}
+
+.drop-hint {
+    font-size: var(--font-size-sm);
+    color: #2dd4bf;
+    margin-top: var(--space-sm);
+}
+
+/* ============================================
+   4. DROP ZONE DARK MODE
+   ============================================ */
+
+[data-theme="dark"] .drop-zone {
+    background: var(--glass-bg) !important;
+    border: 2px dashed rgba(45, 212, 191, 0.4) !important;
+}
+
+[data-theme="dark"] .drop-zone:hover {
+    background: rgba(16, 185, 129, 0.15) !important;
+    border-color: #10B981 !important;
+    box-shadow:
+        0 0 0 4px rgba(16, 185, 129, 0.1),
+        0 0 30px rgba(16, 185, 129, 0.2);
+}
+
+[data-theme="dark"] .drop-zone.dragging {
+    background: rgba(20, 184, 166, 0.15) !important;
+    border-color: #5eead4 !important;
+}
+
+[data-theme="dark"] .drop-content h3 {
+    color: #5eead4;
+}
+
+[data-theme="dark"] .drop-content p {
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .drop-hint {
+    color: #2dd4bf;
+}
+
+/* ============================================
+   5. FILE PREVIEW & EDITING
+   ============================================ */
+
+.file-preview {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-md);
+}
+
+.file-icon {
+    font-size: 32px;
+}
+
+.file-info {
+    flex: 1;
+    text-align: left;
+}
+
+.file-info h4 {
+    color: var(--text-primary);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: 4px;
+    word-break: break-all;
+}
+
+.file-info p {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+/* Editable Filename Input */
+.filename-edit {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin-bottom: 4px;
+}
+
+.filename-input {
+    background: var(--bg-secondary);
+    border: 1px solid var(--glass-border);
+    border-radius: 4px;
+    padding: 6px 10px;
+    color: var(--text-primary);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-medium);
+    flex: 1;
+    min-width: 0;
+    transition: border-color 0.15s ease;
+}
+
+.filename-input:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+}
+
+.filename-ext {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+}
+
+/* ============================================
+   6. UPLOAD PROGRESS
+   ============================================ */
+
+.upload-progress {
+    margin-top: var(--space-lg);
+    width: 100%;
+}
+
+.progress-bar {
+    height: 8px;
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    border-radius: var(--radius-full);
+    transition: width 0.3s ease;
+}
+
+.upload-progress p {
+    text-align: center;
+    margin-top: var(--space-sm);
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+/* ============================================
+   7. SUCCESS CARD
+   ============================================ */
+
+.success-card {
+    background: rgba(52, 199, 89, 0.1);
+    border: 1px solid var(--accent-success);
+}
+
+.success-content {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.success-icon {
+    font-size: 32px;
+}
+
+.success-content h3 {
+    color: var(--accent-success);
+    margin-bottom: var(--space-xs);
+}
+
+.success-content p {
+    color: var(--text-secondary);
+}
+
+.upload-confirm {
+    font-size: var(--font-size-sm);
+    color: var(--accent-success) !important;
+}
+
+/* ============================================
+    10. ERROR MESSAGE
+    ============================================ */
+
+.error-message {
+    padding: var(--space-md);
+    background: rgba(255, 59, 48, 0.1);
+    border: 1px solid var(--accent-danger);
+    border-radius: var(--radius-md);
+    color: var(--accent-danger);
+    text-align: center;
+}
+
+/* ============================================
+   11. TERMS SECTION
+   ============================================ */
+
+.terms-section {
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    border: 1px solid var(--glass-border);
+}
+
+.terms-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    cursor: pointer;
+    line-height: 1.5;
+}
+
+.terms-checkbox input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--accent-primary);
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.terms-text {
+    color: var(--text-primary);
+    font-size: var(--font-size-md);
+}
+
+.terms-link {
+    background: none;
+    border: none;
+    color: var(--accent-primary);
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: inherit;
+    padding: 0;
+    font-family: inherit;
+}
+
+.terms-link:hover {
+    color: var(--accent-secondary);
+}
+
+/* ============================================
+   12. TERMS MODAL
+   ============================================ */
+
+.terms-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: var(--space-md);
+}
+
+.terms-modal {
+    background: var(--bg-primary);
+    border-radius: var(--radius-lg);
+    max-width: 600px;
+    width: 100%;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+.terms-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-lg);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.terms-modal-header h2 {
+    margin: 0;
+    font-size: var(--font-size-xl);
+    color: var(--text-primary);
+}
+
+.terms-modal-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: var(--space-xs);
+    border-radius: var(--radius-sm);
+    transition: all 0.15s ease;
+}
+
+.terms-modal-close:hover {
+    color: var(--text-primary);
+    background: var(--bg-tertiary);
+}
+
+.terms-modal-content {
+    padding: var(--space-lg);
+    overflow-y: auto;
+    flex: 1;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+.terms-modal-content h3 {
+    color: var(--text-primary);
+    font-size: var(--font-size-md);
+    margin: var(--space-md) 0 var(--space-sm);
+}
+
+.terms-modal-content h3:first-child {
+    margin-top: 0;
+}
+
+.terms-modal-content p {
+    margin: 0 0 var(--space-sm);
+}
+
+.terms-modal-footer {
+    display: flex;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    border-top: 1px solid var(--glass-border);
+    justify-content: center;
+}
+
+/* Upload Button */
+.upload-button {
+    margin-top: var(--space-md);
+}
+
+.upload-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ============================================
+   13. ANIMATIONS
+   ============================================ */
+
+.animate-fadeIn {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-slideUp {
+    animation: slideUp 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* ============================================
+   14. MEDIA QUERIES
+   ============================================ */
+
+/* iPad Pro / Small laptop */
+@media (max-width: 1024px) {
+    .upload-page {
+        padding: var(--space-lg) var(--space-md);
+    }
+
+    .upload-container {
+        max-width: 550px;
+    }
+}
+
+/* Tablet (iPad Mini/Air) */
+@media (max-width: 768px) {
+    .upload-header h1 {
+        font-size: var(--font-size-2xl);
+    }
+
+    .upload-header p {
+        font-size: var(--font-size-base);
+    }
+
+    .drop-zone {
+        padding: var(--space-xl);
+    }
+
+    .terms-modal {
+        max-width: 90%;
+        max-height: 85vh;
+    }
+}
+
+/* Mobile (iPhone Pro) */
+@media (max-width: 600px) {
+    .upload-page {
+        padding: var(--space-md) var(--space-sm);
+    }
+
+    .upload-container {
+        max-width: 100%;
+    }
+
+    .upload-header h1 {
+        font-size: var(--font-size-xl);
+    }
+
+    .drop-content h3 {
+        font-size: var(--font-size-lg);
+    }
+
+    .drop-icon {
+        font-size: 44px;
+    }
+
+    .file-preview {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .file-info {
+        text-align: center;
+    }
+
+    .success-actions {
+        flex-direction: column;
+    }
+
+    .metadata-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .terms-modal-footer {
+        flex-direction: column;
+    }
+}
+
+/* Small Mobile (iPhone SE) */
+@media (max-width: 480px) {
+    .upload-header h1 {
+        font-size: var(--font-size-lg);
+    }
+
+    .upload-header p {
+        font-size: var(--font-size-sm);
+    }
+
+    .drop-hint {
+        font-size: var(--font-size-xs);
+    }
+
+    .drop-icon {
+        font-size: 36px;
+    }
+
+    .terms-modal-header h2 {
+        font-size: var(--font-size-lg);
+    }
+
+    .terms-modal-content {
+        padding: var(--space-md);
+    }
+}

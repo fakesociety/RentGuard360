@@ -1,0 +1,138 @@
+/*
+ * ============================================
+ *  RiskGauge.css
+ *  Premium Risk Score Gauge Styles
+ * ============================================
+ *
+ * SECTIONS:
+ * - Base gauge layout
+ * - SVG track & progress
+ * - Indicator dot
+ * - Score number
+ * - Risk level glows (excellent, good, medium, high)
+ * - Theme & size variants
+ *
+ * ============================================
+ */
+
+.risk-gauge {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.gauge-arc-svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+/* Background track */
+.gauge-track {
+    opacity: 0.4;
+}
+
+/* Progress arc */
+.gauge-progress {
+    filter: drop-shadow(0 0 6px var(--glow-color, rgba(245, 158, 11, 0.5)));
+}
+
+/* Indicator dot */
+.gauge-indicator {
+    fill: #ffffff;
+    stroke: rgba(255, 255, 255, 0.3);
+    stroke-width: 2;
+    filter: drop-shadow(0 0 8px var(--glow-color, rgba(245, 158, 11, 0.6)));
+}
+
+/* Score number in center */
+.gauge-score {
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    line-height: 1;
+}
+
+/* Risk level glows - 4 levels */
+
+/* Excellent (86-100): Low Risk - Green */
+.risk-gauge.risk-excellent {
+    --glow-color: rgba(52, 199, 89, 0.6);
+}
+
+.risk-gauge.risk-excellent .gauge-indicator {
+    fill: #34c759;
+}
+
+/* Good (71-85): Low-Medium Risk - Teal */
+.risk-gauge.risk-good {
+    --glow-color: rgba(20, 184, 166, 0.6);
+}
+
+.risk-gauge.risk-good .gauge-indicator {
+    fill: #14b8a6;
+}
+
+/* Medium (51-70): Medium Risk - Orange */
+.risk-gauge.risk-medium {
+    --glow-color: rgba(245, 158, 11, 0.6);
+}
+
+.risk-gauge.risk-medium .gauge-indicator {
+    fill: #f59e0b;
+}
+
+/* High (0-50): High Risk - Red */
+.risk-gauge.risk-high {
+    --glow-color: rgba(239, 68, 68, 0.6);
+}
+
+.risk-gauge.risk-high .gauge-indicator {
+    fill: #ef4444;
+}
+
+/* Legacy: risk-low maps to excellent */
+.risk-gauge.risk-low {
+    --glow-color: rgba(16, 185, 129, 0.6);
+}
+
+.risk-gauge.risk-low .gauge-indicator {
+    fill: #10b981;
+}
+
+/* Light mode adjustments */
+@media (prefers-color-scheme: light) {
+    .gauge-score {
+        color: #1e293b;
+        text-shadow: none;
+    }
+}
+
+/* Explicit light mode via data-theme */
+[data-theme="light"] .gauge-score {
+    color: #1e293b;
+    text-shadow: none;
+}
+
+/* Explicit dark mode - keep score white */
+[data-theme="dark"] .gauge-score {
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Compact size variant */
+.risk-gauge.compact .gauge-score {
+    font-size: 1rem;
+}
+
+/* Large size variant */
+.risk-gauge.large .gauge-score {
+    font-size: 1.75rem;
+}

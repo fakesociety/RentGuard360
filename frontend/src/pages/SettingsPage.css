@@ -1,0 +1,653 @@
+/* 
+ * SettingsPage.css - Settings Page Styles
+ * User settings, profile, appearance, notifications
+ * 
+ * STRUCTURE:
+ * 1. Page Layout
+ * 2. Page Title
+ * 3. Section Headers
+ * 4. Profile Section
+ * 5. Setting Rows
+ * 6. Theme Preview
+ * 7. About Section
+ * 8. Danger Card
+ * 9. Animations
+ * 10. Media Queries (768px, 600px, 480px)
+ */
+
+/* ============================================
+   1. PAGE LAYOUT
+   ============================================ */
+
+/* 
+ * Settings Page Layout Fix:
+
+ * How it works:
+ * 1. .app-container becomes a flex column (stacks nav, main, footer vertically)
+ * 2. .app-main gets flex: 1, which means "grow to fill all available space"
+ * 3. This pushes the footer to the bottom, and .app-main's background 
+ *    (--bg-page) fills the entire area with no gap.
+ * 
+ * The :has() selector applies these ONLY when settings-page is present,
+ * so other pages are not affected.
+ */
+.app-container:has(.settings-page) {
+    display: flex;
+    flex-direction: column;
+}
+
+.app-main:has(.settings-page) {
+    background: var(--bg-page);
+    flex: 1;
+}
+
+/* Note: .page-container provides the full-width background */
+.settings-page {
+    min-height: 100vh;
+    padding: var(--space-xl) var(--space-md);
+    padding-bottom: 0;
+    /* Remove bottom padding - let content extend to footer */
+}
+
+/* All direct children get centered with max-width */
+.settings-page>* {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ============================================
+   2. PAGE TITLE
+   ============================================ */
+
+.settings-title {
+    font-size: var(--font-size-3xl);
+    color: var(--text-primary);
+    margin-bottom: var(--space-xl);
+    text-align: center;
+}
+
+/* ============================================
+   3. SECTION HEADERS
+   ============================================ */
+
+.settings-section {
+    margin-bottom: var(--space-xl);
+}
+
+.settings-page .section-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-md);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.settings-page .section-title.danger {
+    color: var(--accent-danger);
+}
+
+/* ============================================
+   4. PROFILE SECTION
+   ============================================ */
+
+.profile-info-grid {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+}
+
+.profile-avatar-large {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-2xl);
+    flex-shrink: 0;
+}
+
+.profile-details {
+    flex: 1;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-sm) 0;
+}
+
+.info-row:not(:last-child) {
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.info-label {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.info-value {
+    color: var(--text-primary);
+    font-weight: var(--font-weight-medium);
+}
+
+/* ============================================
+   5. SETTING ROWS
+   ============================================ */
+
+.setting-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-lg);
+}
+
+.setting-info h3 {
+    color: var(--text-primary);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: 4px;
+}
+
+.setting-info p {
+    font-size: var(--font-size-sm);
+    color: var(--text-tertiary);
+}
+
+/* ============================================
+   6. THEME PREVIEW
+   ============================================ */
+
+.theme-preview {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--glass-border);
+}
+
+.preview-card {
+    width: 120px;
+    height: 80px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-normal);
+    border: 1px solid var(--glass-border);
+}
+
+.preview-card.light {
+    background: var(--bg-page);
+}
+
+.preview-card.dark {
+    background: #151a23;
+}
+
+.preview-header {
+    height: 20px;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+}
+
+.preview-content {
+    padding: var(--space-sm);
+}
+
+.preview-line {
+    height: 8px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+}
+
+.preview-card.light .preview-line {
+    background: var(--bg-inset);
+}
+
+.preview-card.dark .preview-line {
+    background: #1E2530;
+}
+
+.preview-line.short {
+    width: 60%;
+    margin-bottom: 0;
+}
+
+.preview-label {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+/* ============================================
+   7. ABOUT SECTION
+   ============================================ */
+
+.about-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.about-row {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--space-sm) 0;
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.about-row:not(:last-child) {
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.about-value {
+    color: var(--text-primary);
+    font-weight: var(--font-weight-medium);
+}
+
+/* ============================================
+   NOTIFICATION INFO BOX (Email Verification)
+   ============================================ */
+
+.notification-info-box {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+}
+
+.notification-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+
+.notification-content h3 {
+    color: var(--text-primary);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-xs);
+}
+
+.notification-description {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+}
+
+.notification-tip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-sm);
+    background: rgba(34, 197, 94, 0.12);
+    border: 1px solid rgba(34, 197, 94, 0.25);
+    border-radius: var(--radius-md);
+    margin-top: var(--space-sm);
+}
+
+.tip-icon {
+    font-size: 0.9rem;
+}
+
+.tip-text {
+    font-size: var(--font-size-xs);
+    color: #16a34a;
+    font-weight: var(--font-weight-medium);
+}
+
+[data-theme="dark"] .notification-tip {
+    background: rgba(34, 197, 94, 0.15);
+    border-color: rgba(34, 197, 94, 0.3);
+}
+
+[data-theme="dark"] .tip-text {
+    color: #4ade80;
+}
+
+@media (max-width: 480px) {
+    .notification-info-box {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+/* ============================================
+   8. DANGER CARD
+   ============================================ */
+
+.danger-card {
+    border: 1px solid rgba(239, 68, 68, 0.2) !important;
+}
+
+[data-theme="dark"] .danger-card {
+    border-color: rgba(239, 68, 68, 0.3) !important;
+}
+
+/* ============================================
+   9. ANIMATIONS
+   ============================================ */
+
+.animate-fadeIn {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-slideUp {
+    animation: slideUp 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   10. MEDIA QUERIES
+   ============================================ */
+
+/* Tablet (iPad Mini/Air) */
+@media (max-width: 768px) {
+    .settings-page>* {
+        max-width: 100%;
+        padding: 0 var(--space-sm);
+    }
+
+    .settings-title {
+        font-size: var(--font-size-2xl);
+    }
+
+    .theme-preview {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* Mobile (iPhone Pro) */
+@media (max-width: 600px) {
+    .profile-avatar-large {
+        width: 60px;
+        height: 60px;
+        font-size: var(--font-size-xl);
+    }
+
+    .info-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .preview-card {
+        width: 100px;
+        height: 68px;
+    }
+}
+
+/* Small Mobile (iPhone SE) */
+@media (max-width: 480px) {
+    .profile-info-grid {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-details {
+        width: 100%;
+    }
+
+    .setting-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-md);
+    }
+
+    /* stack label and value vertically */
+    .about-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .about-value {
+        word-break: break-word;
+    }
+}
+
+/* ============================================
+   DAN DID IT - Delete Account Modal Styles
+   ============================================ */
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: var(--space-md);
+    overflow-y: auto;
+}
+
+.modal-content {
+    background: var(--bg-elevated);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    max-width: 450px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: var(--shadow-xl);
+    margin: auto;
+}
+
+.delete-modal {
+    border: 2px solid rgba(239, 68, 68, 0.3);
+}
+
+.modal-close {
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    padding: var(--space-xs);
+    transition: color var(--transition-fast);
+    z-index: 1;
+    /* DAN DID IT - Keep close button above content */
+}
+
+.modal-close:hover {
+    color: var(--text-primary);
+}
+
+.modal-close:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.modal-icon {
+    font-size: 48px;
+    text-align: center;
+    margin-bottom: var(--space-md);
+    line-height: 1;
+    /* DAN DID IT - Fix icon centering */
+    display: flex;
+    /* DAN DID IT - Use flexbox for better centering */
+    align-items: center;
+    /* DAN DID IT - Vertically center icon */
+    justify-content: center;
+    /* DAN DID IT - Horizontally center icon */
+    height: 60px;
+    /* DAN DID IT - Fixed height for consistent centering */
+}
+
+.danger-icon {
+    color: var(--accent-danger);
+}
+
+.modal-content h2 {
+    text-align: center;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+    /* DAN DID IT - Reduced spacing */
+    font-size: var(--font-size-xl);
+    /* DAN DID IT - Slightly smaller heading */
+}
+
+.delete-warning {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: var(--radius-md);
+    padding: var(--space-sm) var(--space-md);
+    /* DAN DID IT - Reduced vertical padding */
+    margin-bottom: var(--space-md);
+    /* DAN DID IT - Reduced spacing */
+}
+
+.delete-warning p {
+    color: var(--text-secondary);
+    margin: var(--space-xs) 0;
+    line-height: 1.5;
+    /* DAN DID IT - Slightly tighter line height */
+    font-size: var(--font-size-sm);
+    /* DAN DID IT - Smaller font for more compact look */
+}
+
+.warning-text {
+    color: var(--accent-danger) !important;
+    font-weight: var(--font-weight-semibold) !important;
+    margin-top: var(--space-sm) !important;
+}
+
+.delete-confirm-input {
+    margin-bottom: var(--space-md);
+    /* DAN DID IT - Reduced spacing */
+}
+
+.delete-confirm-input label {
+    display: block;
+    color: var(--text-primary);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: var(--space-sm);
+}
+
+.delete-confirm-input input {
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--bg-inset);
+    color: var(--text-primary);
+    font-size: var(--font-size-md);
+    font-family: monospace;
+    transition: border-color var(--transition-fast);
+}
+
+.delete-confirm-input input:focus {
+    outline: none;
+    border-color: var(--accent-danger);
+}
+
+.delete-confirm-input input:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.error-message {
+    color: var(--accent-danger);
+    text-align: center;
+    margin-bottom: var(--space-md);
+    font-size: var(--font-size-sm);
+}
+
+.modal-actions {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: flex-end;
+}
+
+.modal-actions button {
+    flex: 1;
+}
+
+/* DAN DID IT - Improved responsive behavior for mobile */
+@media (max-width: 600px) {
+    .modal-content {
+        max-width: 95vw;
+        /* DAN DID IT - Use more screen width on mobile */
+        padding: var(--space-md);
+    }
+
+    .modal-icon {
+        font-size: 40px;
+        /* DAN DID IT - Smaller icon on mobile */
+        height: 50px;
+    }
+
+    .modal-content h2 {
+        font-size: var(--font-size-lg);
+    }
+
+    .delete-warning {
+        padding: var(--space-sm);
+    }
+
+    .delete-warning p {
+        font-size: 0.85rem;
+        /* DAN DID IT - Even smaller text on mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-backdrop {
+        padding: var(--space-sm);
+        /* DAN DID IT - Less padding on very small screens */
+    }
+
+    .modal-content {
+        padding: var(--space-sm) var(--space-md);
+        max-height: 95vh;
+        /* DAN DID IT - Use more viewport height */
+    }
+
+    .modal-actions {
+        flex-direction: column-reverse;
+        gap: var(--space-sm);
+    }
+
+    .modal-actions button {
+        width: 100%;
+    }
+
+    .modal-icon {
+        font-size: 36px;
+        height: 45px;
+        margin-bottom: var(--space-sm);
+    }
+}

@@ -1,0 +1,76 @@
+{
+  "Comment": "RentGuard 360 - Contract Analysis Workflow",
+  "StartAt": "ExtractPDFText",
+  "States": {
+    "ExtractPDFText": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:<region>:<account-id>:function:RentGuard_AzureOCR:$LATEST",
+      "Next": "SanitizeText",
+      "Catch": [
+        {
+          "ErrorEquals": [
+            "States.ALL"
+          ],
+          "Next": "HandleError"
+        }
+      ]
+    },
+    "SanitizeText": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:<region>:<account-id>:function:privacy-shield:$LATEST",
+      "Next": "AnalyzeContract",
+      "Catch": [
+        {
+          "ErrorEquals": [
+            "States.ALL"
+          ],
+          "Next": "HandleError"
+        }
+      ]
+    },
+    "AnalyzeContract": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:<region>:<account-id>:function:ai-analyzer:$LATEST",
+      "Next": "SaveResults",
+      "Catch": [
+        {
+          "ErrorEquals": [
+            "States.ALL"
+          ],
+          "Next": "HandleError"
+        }
+      ]
+    },
+    "SaveResults": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:<region>:<account-id>:function:save-results",
+      "Next": "NotifyUser",
+      "Catch": [
+        {
+          "ErrorEquals": [
+            "States.ALL"
+          ],
+          "Next": "HandleError"
+        }
+      ]
+    },
+    "NotifyUser": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:<region>:<account-id>:function:NotifyUser",
+      "End": true,
+      "Catch": [
+        {
+          "ErrorEquals": [
+            "States.ALL"
+          ],
+          "Next": "HandleError"
+        }
+      ]
+    },
+    "HandleError": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:<region>:<account-id>:function:error-handler",
+      "End": true
+    }
+  }
+}
