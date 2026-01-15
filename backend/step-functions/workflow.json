@@ -8,7 +8,9 @@
       "Next": "PrivacyShield",
       "Catch": [
         {
-          "ErrorEquals": ["States.ALL"],
+          "ErrorEquals": [
+            "States.ALL"
+          ],
           "ResultPath": "$.error",
           "Next": "ErrorHandler"
         }
@@ -20,7 +22,9 @@
       "Next": "AIAnalyzer",
       "Catch": [
         {
-          "ErrorEquals": ["States.ALL"],
+          "ErrorEquals": [
+            "States.ALL"
+          ],
           "ResultPath": "$.error",
           "Next": "ErrorHandler"
         }
@@ -32,7 +36,9 @@
       "Next": "SaveResults",
       "Catch": [
         {
-          "ErrorEquals": ["States.ALL"],
+          "ErrorEquals": [
+            "States.ALL"
+          ],
           "ResultPath": "$.error",
           "Next": "ErrorHandler"
         }
@@ -44,7 +50,9 @@
       "Next": "NotifyUser",
       "Catch": [
         {
-          "ErrorEquals": ["States.ALL"],
+          "ErrorEquals": [
+            "States.ALL"
+          ],
           "ResultPath": "$.error",
           "Next": "ErrorHandler"
         }
@@ -56,7 +64,9 @@
       "End": true,
       "Catch": [
         {
-          "ErrorEquals": ["States.ALL"],
+          "ErrorEquals": [
+            "States.ALL"
+          ],
           "ResultPath": "$.error",
           "Next": "ErrorHandler"
         }
