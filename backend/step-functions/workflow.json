@@ -1,75 +1,70 @@
 {
   "Comment": "RentGuard 360 - Contract Analysis Workflow",
-  "StartAt": "ExtractPDFText",
+  "StartAt": "AzureOCR",
   "States": {
-    "ExtractPDFText": {
+    "AzureOCR": {
       "Type": "Task",
-      "Resource": "arn:aws:lambda:<region>:<account-id>:function:RentGuard_AzureOCR:$LATEST",
-      "Next": "SanitizeText",
+      "Resource": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${ProjectName}-AzureOCR${NameSuffix}",
+      "Next": "PrivacyShield",
       "Catch": [
         {
-          "ErrorEquals": [
-            "States.ALL"
-          ],
-          "Next": "HandleError"
+          "ErrorEquals": ["States.ALL"],
+          "ResultPath": "$.error",
+          "Next": "ErrorHandler"
         }
       ]
     },
-    "SanitizeText": {
+    "PrivacyShield": {
       "Type": "Task",
-      "Resource": "arn:aws:lambda:<region>:<account-id>:function:privacy-shield:$LATEST",
-      "Next": "AnalyzeContract",
+      "Resource": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${ProjectName}-PrivacyShield${NameSuffix}",
+      "Next": "AIAnalyzer",
       "Catch": [
         {
-          "ErrorEquals": [
-            "States.ALL"
-          ],
-          "Next": "HandleError"
+          "ErrorEquals": ["States.ALL"],
+          "ResultPath": "$.error",
+          "Next": "ErrorHandler"
         }
       ]
     },
-    "AnalyzeContract": {
+    "AIAnalyzer": {
       "Type": "Task",
-      "Resource": "arn:aws:lambda:<region>:<account-id>:function:ai-analyzer:$LATEST",
+      "Resource": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${ProjectName}-AIAnalyzer${NameSuffix}",
       "Next": "SaveResults",
       "Catch": [
         {
-          "ErrorEquals": [
-            "States.ALL"
-          ],
-          "Next": "HandleError"
+          "ErrorEquals": ["States.ALL"],
+          "ResultPath": "$.error",
+          "Next": "ErrorHandler"
         }
       ]
     },
     "SaveResults": {
       "Type": "Task",
-      "Resource": "arn:aws:lambda:<region>:<account-id>:function:save-results",
+      "Resource": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${ProjectName}-SaveResults${NameSuffix}",
       "Next": "NotifyUser",
       "Catch": [
         {
-          "ErrorEquals": [
-            "States.ALL"
-          ],
-          "Next": "HandleError"
+          "ErrorEquals": ["States.ALL"],
+          "ResultPath": "$.error",
+          "Next": "ErrorHandler"
         }
       ]
     },
     "NotifyUser": {
       "Type": "Task",
-      "Resource": "arn:aws:lambda:<region>:<account-id>:function:NotifyUser",
+      "Resource": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${ProjectName}-NotifyUser${NameSuffix}",
       "End": true,
       "Catch": [
         {
-          "ErrorEquals": [
-            "States.ALL"
-          ],
-          "Next": "HandleError"
+          "ErrorEquals": ["States.ALL"],
+          "ResultPath": "$.error",
+          "Next": "ErrorHandler"
         }
       ]
     },
-    "HandleError": {
+    "ErrorHandler": {
       "Type": "Task",
-      "Resource": "arn:aws:lambda:<region>:<account-id>:function:error-handler",
+      "Resource": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${ProjectName}-ErrorHandler${NameSuffix}",
       "End": true
     }
   }
