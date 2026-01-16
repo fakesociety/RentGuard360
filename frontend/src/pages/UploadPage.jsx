@@ -81,7 +81,19 @@ const UploadPage = () => {
                 const result = await pollForAnalysis(uploadedContractId, 24, 5000);
                 if (cancelled) return;
                 if (result) {
-                    navigate(`/analysis/${encodeURIComponent(uploadedContractId)}`);
+                    // Pass contract data in navigation state for immediate display
+                    navigate(`/analysis/${encodeURIComponent(uploadedContractId)}`, {
+                        state: {
+                            contract: {
+                                ...result,
+                                contractId: uploadedContractId,
+                                fileName: customFileName || result?.fileName,
+                                propertyAddress: metadata.propertyAddress || result?.propertyAddress,
+                                landlordName: metadata.landlordName || result?.landlordName,
+                                uploadDate: result?.uploadDate || new Date().toISOString(),
+                            }
+                        }
+                    });
                 }
             } catch (e) {
                 // If polling fails/times out, keep the user on this page (they can go to contracts manually)

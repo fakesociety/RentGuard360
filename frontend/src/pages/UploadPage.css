@@ -325,6 +325,13 @@
     color: var(--accent-success) !important;
 }
 
+.success-actions {
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 /* ============================================
     10. ERROR MESSAGE
     ============================================ */
